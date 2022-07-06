@@ -1,0 +1,4 @@
+rootProject.name = 'gradleMulti'
+include 'coreGrailsApp'
+include 'filterpane'
+

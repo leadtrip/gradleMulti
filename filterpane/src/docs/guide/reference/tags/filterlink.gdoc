@@ -1,0 +1,73 @@
+h4. filterLink
+This tag generates a html link that links to a filter action listing items filtered upon the specified values.
+{table}
+*Attribute Name* | *Required* | *Default Value* | *Description*
+values | Yes | None | A map containing field values by field name. The field is the field within the bean (with the filter) that should be used for filtering. The value may contain a map with additional filter directives. See examples below. 
+controller | No | Current controller | The name of the controller to use in the link; if not specified the current controller will be linked.
+action | No | filter | The name of the filter-action to use in the link; if not specified the action named "filter" will be linked
+filterParams | No | None | Previously used filterParams can be forwarded to the link by using this attribute. Will for instance preserve sort and order if it has been currently set.
+class | No | None | The class attribute to use for the html link. 
+{table}
+Additionally you may use all the optional attributes that you can use for the grails tag g:link.
+
+h5. values examples
+The simplest version is filtering all items by property firstName equals Adam.
+{code}
+values="${[firstName:'Adam']}"
+{code}
+
+Filtering all items by property firstName contains some text, requires that you specify the operator. The same applies to all the other single argument operators of the filterpane see below.
+{code}
+values="${[firstName:[op:'ILike', value:'Ada']]}"
+{code}
+
+Filtering all items by property firstName beginning with some text (case sensitive), requires that you specify the operator. The same applies to all the other single argument operators of the filterpane see below.
+{code}
+values="${[firstName:[op:'BeginsWith', value:'Ada']]}"
+{code}
+
+Filtering all items by property firstName beginning with some text (case in-sensitive), requires that you specify the operator. The same applies to all the other single argument operators of the filterpane see below.
+{code}
+values="${[firstName:[op:'IBeginsWith', value:'Ada']]}"
+{code}
+
+Filtering all items by property firstName ending with some text (case sensitive), requires that you specify the operator. The same applies to all the other single argument operators of the filterpane see below.
+{code}
+values="${[firstName:[op:'EndsWith', value:'bert']]}"
+{code}
+
+Filtering all items by property firstName ending with some text (case in-sensitive), requires that you specify the operator. The same applies to all the other single argument operators of the filterpane see below.
+{code}
+values="${[firstName:[op:'IEndsWith', value:'bert']]}"
+{code}
+
+Filtering all items by property age between 17 and 42.
+{code}
+values="${[age:[op:'Between', from:17, to:42]]}"
+{code}
+
+h5. example usage
+Creating a link that links to a filtered list of books where the author is the same as the current authorInstance:
+{code}
+<filterpane:filterLink values="${['author.id' : authorInstance.id]}" controller="book" action="filter">
+  "Books by this author"
+</filterpane:filterLink>
+{code}
+
+h5. Available op operators
+{table}
+*op* | *Description*
+Between | Between two values, see example above. Requires both from and to value. Both from and to values are inclusive.
+Equal | Equal case insensitive
+GreaterThan | Greater than
+GreaterThanEquals | Greater than or equals
+ILike | Contains, case insensitive
+IsNotNull | No value assigned. Requires no value.
+IsNull | Value is assigned. Requires no value.
+LessThan | Less than
+LessThanEquals | Less than or equals
+Like | Like, case sensitive
+NotEqual | Not equal to
+NotILike | Does not contain, case insensitive.
+NotLike | Does not contain, case sensitive
+{table}

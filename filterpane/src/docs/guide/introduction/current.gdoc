@@ -1,0 +1,4 @@
+h2. Version 2.2.5 Release Notes
+
+* Filter by subclass attributes [https://github.com/Grails-Plugin-Consortium/grails-filterpane/pull/27]
+* Filter by class [https://github.com/Grails-Plugin-Consortium/grails-filterpane/pull/27]
